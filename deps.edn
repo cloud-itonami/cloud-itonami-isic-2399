@@ -8,7 +8,15 @@
  ;; directly (not only under :dev) so a bare `clojure -M:test` works
  ;; offline inside the monorepo checkout without depending on
  ;; langgraph's own transitive git/sha pin being fetchable.
- :deps {io.github.kotoba-lang/langgraph
+ ;; jp-go-digital-design-system (DADS) is the workspace's BASE design
+ ;; system (com-junkawasaki/root CLAUDE.md, 2026-08-05). Pinned by git
+ ;; sha rather than :local/root so `docs/samples/operator-console.html`
+ ;; is byte-reproducible outside this checkout too -- the vendored CSS
+ ;; is the bulk of the page.
+ :deps {io.github.kotoba-lang/jp-go-digital-design-system
+        {:git/url "https://github.com/kotoba-lang/jp-go-digital-design-system"
+         :git/sha "83db99546eabc53613ae826ea41d1533a3c574af"}
+        io.github.kotoba-lang/langgraph
         {:local/root "../../kotoba-lang/langgraph"}
         io.github.kotoba-lang/langchain
         {:local/root "../../kotoba-lang/langchain"}}
@@ -21,6 +29,11 @@
          {:local/root "../../kotoba-lang/langchain"}}}
   ;; clojure -M:dev:run  -> drive the demo through one OperationActor
   :run {:main-opts ["-m" "mineralwoolmfg.sim"]}
+  ;; clojure -M:dev:render-html [out-file] -> regenerate
+  ;; docs/samples/operator-console.html by actually RUNNING the actor
+  ;; (flagship checklist item 2, ADR-2607189300). Throws if the run
+  ;; produced no HARD governor hold.
+  :render-html {:main-opts ["-m" "mineralwoolmfg.render-html"]}
   :test {:extra-paths ["test"]
          :extra-deps {io.github.cognitect-labs/test-runner
                       {:git/tag "v0.5.1" :git/sha "dfb30dd"}}
