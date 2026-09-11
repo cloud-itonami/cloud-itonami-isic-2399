@@ -1,5 +1,5 @@
 (ns mineralwoolmfg.sim
-  "Demo driver -- `clojure -M:dev:run`. Walks a clean mineral wool
+  "Demo driver -- `kbb -M:dev:run`. Walks a clean mineral wool
   insulation plant through intake -> maintenance scheduling (escalate/
   approve) -> safety-concern flag (escalate/approve) -> shipment
   coordination (escalate/approve), then shows HARD-hold scenarios: a

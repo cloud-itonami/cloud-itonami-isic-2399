@@ -11,7 +11,7 @@
   `mineralwoolmfg.operation` (a langgraph-clj StateGraph) ->
   `mineralwoolmfg.governor` -> `mineralwoolmfg.store` -- via
   `langgraph.graph/run*`, exactly as `mineralwoolmfg.sim`
-  (`clojure -M:dev:run`) does, and then renders the RESULT. Every row
+  (`kbb -M:dev:run`) does, and then renders the RESULT. Every row
   traces to one of:
 
     - post-run SSoT state   (`store/all-batches`, `store/all-equipment`,
@@ -52,7 +52,7 @@
   is enforced at build time rather than left as a convention (precedent:
   `cloud-itonami-isic-2513`).
 
-  Usage: `clojure -M:dev:render-html [out-file]`
+  Usage: `kbb -M:dev:render-html [out-file]`
   (default `docs/samples/operator-console.html`)."
   (:require [jp-go-dds.skin]
             [kotoba.lang.text :as str]
@@ -589,7 +589,7 @@
      "    <p class=\"muted\">このページは手書きではない。"
      "<code>mineralwoolmfg.operation</code> (langgraph StateGraph) &rarr; "
      "<code>mineralwoolmfg.governor</code> &rarr; <code>mineralwoolmfg.store</code> を "
-     "<code>clojure -M:dev:render-html</code> で実際に走らせた結果を描画している。"
+     "<code>kbb -M:dev:render-html</code> で実際に走らせた結果を描画している。"
      "行はすべて実行後の SSoT / append-only ledger / 各 run の audit trail に辿れる。</p>\n"
      "    <table>\n"
      "      <thead><tr><th>指標</th><th>実測値</th></tr></thead>\n"
@@ -673,7 +673,7 @@
 
      "</main>\n"
      "<footer>\n"
-     "  <p>生成: <code>clojure -M:dev:render-html</code> "
+     "  <p>生成: <code>kbb -M:dev:render-html</code> "
      "(<code>mineralwoolmfg.render-html</code>)。"
      "タイムスタンプも生成 id も含まないため、同じ seed に対して連続実行は byte 一致する。</p>\n"
      "</footer>\n"
