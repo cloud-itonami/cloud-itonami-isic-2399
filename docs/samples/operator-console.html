@@ -2469,7 +2469,7 @@ img,svg { max-width: 100%; height: auto; }</style></head><body>
 <main>
   <section class="card">
     <h2>この run の要約</h2>
-    <p class="muted">このページは手書きではない。<code>mineralwoolmfg.operation</code> (langgraph StateGraph) &rarr; <code>mineralwoolmfg.governor</code> &rarr; <code>mineralwoolmfg.store</code> を <code>clojure -M:dev:render-html</code> で実際に走らせた結果を描画している。行はすべて実行後の SSoT / append-only ledger / 各 run の audit trail に辿れる。</p>
+    <p class="muted">このページは手書きではない。<code>mineralwoolmfg.operation</code> (langgraph StateGraph) &rarr; <code>mineralwoolmfg.governor</code> &rarr; <code>mineralwoolmfg.store</code> を <code>kbb -M:dev:render-html</code> で実際に走らせた結果を描画している。行はすべて実行後の SSoT / append-only ledger / 各 run の audit trail に辿れる。</p>
     <table>
       <thead><tr><th>指標</th><th>実測値</th></tr></thead>
       <tbody>
@@ -2643,6 +2643,6 @@ img,svg { max-width: 100%; height: auto; }</style></head><body>
   </section>
 </main>
 <footer>
-  <p>生成: <code>clojure -M:dev:render-html</code> (<code>mineralwoolmfg.render-html</code>)。タイムスタンプも生成 id も含まないため、同じ seed に対して連続実行は byte 一致する。</p>
+  <p>生成: <code>kbb -M:dev:render-html</code> (<code>mineralwoolmfg.render-html</code>)。タイムスタンプも生成 id も含まないため、同じ seed に対して連続実行は byte 一致する。</p>
 </footer>
 </body></html>
