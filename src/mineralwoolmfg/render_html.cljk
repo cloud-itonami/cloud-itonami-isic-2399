@@ -54,7 +54,7 @@
 
   Usage: `kbb -M:dev:render-html [out-file]`
   (default `docs/samples/operator-console.html`)."
-  (:require [jp-go-dds.skin]
+  (:require [kotoba.io :as kio] [jp-go-dds.skin]
             [kotoba.lang.text :as str]
             [langgraph.graph :as g]
             [mineralwoolmfg.governor :as governor]
@@ -692,8 +692,8 @@
                       {:ledger-facts (count (store/ledger db))
                        :runs (count runs)
                        :governor-holds (count (holds db))})))
-    (let [f (java.io.File. ^String out)]
-      (when-let [p (.getParentFile f)] (.mkdirs p))
+    (let [f (kio/file ^String out)]
+      (when-let [p (kio/parent-file f)] (kio/mkdirs p))
       (spit f (render result)))
     (println "wrote" out
              (str "(" (count runs) " requests, "
