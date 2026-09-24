@@ -1,0 +1,34 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:dev:physics` runs it.
+;;
+;; The README has no "Robotics premise" section; its Scope illustrates the
+;; residual ISIC 2399 class with one product line, mineral wool insulation.
+;; The physical work taken here: the fire-resistance check the plant's QC
+;; runs on its board (standard fire on one face, unexposed-face temperature
+;; after 60 minutes), and the packing robot lifting compressed batt packs
+;; onto the pallet.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+;; Replacing an estimate with a sourced value is this bot's growth work.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isic-2399"
+ :cases
+ [{:id :board-fire-insulation
+   :kind :thermal
+   :procedure "stone-wool board exposed on one face to the ISO 834 standard fire for 60 minutes; the unexposed-face temperature is judged (convection only on both faces, radiation not modelled)"
+   :params {:thickness-m 0.05 :conductivity-w-mk 0.10 :density-kg-m3 100.0 :specific-heat-j-kgk 1000.0
+            :t0-c 20.0 :hot-curve :iso-834 :h-front-w-m2k 25.0 :t-back-ambient-c 20.0 :h-back-w-m2k 4.0
+            :threshold-c 160.0 :duration-s 3600.0 :nodes 21}
+   :sweep {:param :thickness-m :values [0.03 0.05 0.07 0.10 0.15]}
+   :quantity :peak-back-c
+   :limit {:max 160.0 :basis "ISO 834-1 insulation criterion: mean unexposed-face temperature rise not above 140 K (20 C start + 140 K = 160 C) for the 60-minute period; board conductivity 0.10 W/mK is an estimate of the high-temperature effective value"}
+   :boundary {:lo 0.01 :hi 0.20}}
+  {:id :batt-pack-palletising
+   :kind :manipulator
+   :procedure "packing arm lifts compressed, film-wrapped batt packs from the packer outfeed onto the pallet"
+   :params {:l1-m 0.70 :l2-m 0.60 :m1-kg 12.0 :m2-kg 8.0
+            :from [0.90 0.20] :to [0.40 1.00] :duration-s 2.5 :steps 500}
+   :sweep {:param :payload-kg :values [8.0 12.0 16.0 20.0 30.0]}
+   :quantity :peak-tau1-nm
+   :limit {:max 450.0 :basis "estimate: continuous shoulder torque of a ~40 kg-payload palletising arm class"}
+   :boundary {:lo 1.0 :hi 100.0}}]}
