@@ -9,7 +9,7 @@
  ;; offline inside the monorepo checkout without depending on
  ;; langgraph's own transitive git/sha pin being fetchable.
  ;; jp-go-digital-design-system (DADS) is the workspace's BASE design
- ;; system (com-junkawasaki/root CLAUDE.md, 2026-08-05). Pinned by git
+ ;; system (com-junkawasaki/root AGENTS.md, 2026-08-05). Pinned by git
  ;; sha rather than :local/root so `docs/samples/operator-console.html`
  ;; is byte-reproducible outside this checkout too -- the vendored CSS
  ;; is the bulk of the page.
